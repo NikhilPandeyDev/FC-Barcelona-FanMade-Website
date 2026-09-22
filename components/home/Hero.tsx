@@ -1,12 +1,9 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Play, Shield, Calendar } from 'lucide-react';
+import { ArrowRight, Calendar } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { Button } from '../ui/Button';
-import { Badge } from '../ui/Badge';
 import { Reveal } from '../motion/Reveal';
 
 export function Hero() {
@@ -55,7 +52,7 @@ export function Hero() {
           <Reveal direction="up" delay={0.5}>
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Button
-                href="#squad"
+                href="/squad"
                 variant="primary"
                 size="lg"
                 isMagnetic

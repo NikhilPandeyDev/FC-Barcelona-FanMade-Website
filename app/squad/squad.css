@@ -1,0 +1,71 @@
+.squad-experience { --squad-line: rgba(255,255,255,.15); }
+.squad-experience :is(a, button) { scroll-margin-top: 7rem; }
+.squad-experience :is(a, button):focus-visible { outline: 2px solid var(--gold); outline-offset: 6px; }
+.squad-kicker { font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase; color: #F5D741; }
+.squad-title { font-family: var(--font-display); font-size: clamp(3.5rem, 12.5vw, 11rem); font-weight: 800; letter-spacing: -.065em; line-height: .94; padding-bottom:.06em; }
+.squad-title-outline { color: transparent; -webkit-text-stroke: 1px rgba(240,242,245,.75); }
+.squad-hero { background: linear-gradient(115deg, #060709 45%, #001633); }
+.squad-light { position:absolute; width:55%; height:150%; right:-15%; top:-25%; background:linear-gradient(110deg, transparent 30%, #A5004455 50%, transparent 75%); transform:rotate(20deg); animation:squad-light-enter 1.8s ease-out both; pointer-events:none; }
+@keyframes squad-light-enter { from { opacity:0; transform:translateX(8%) rotate(20deg); } to { opacity:1; transform:translateX(0) rotate(20deg); } }
+.squad-filter { min-height:48px; min-width:44px; padding-inline:.5rem; border-bottom:2px solid transparent; color:#A1A7B5; font-size:.8rem; font-weight:600; cursor:pointer; transition:color .2s, border-color .2s; }
+.squad-filter:hover { color:white; }
+.squad-filter:active { background:#ffffff08; }
+.squad-filter[aria-pressed="true"] { color:#F5D741; border-color:#F5D741; }
+.squad-results { min-height:28rem; }
+.player-card { display:flex; flex-direction:column; container-type:inline-size; height:100%; background:#0D101A; border:1px solid var(--squad-line); transition:border-color .25s, background .25s; }
+.player-card-name { font-size:clamp(1.125rem, 7.2cqw, 1.75rem); overflow-wrap:break-word; text-wrap:balance; }
+.player-card-copy { min-height:13.5rem; }
+.player-card:hover, .player-card:focus-visible { border-color:#F5D741; background:#12151F; }
+.player-card:active { background:#1B2030; }
+.player-art { position:relative; flex-shrink:0; container-type:inline-size; display:grid; place-items:center; overflow:hidden; isolation:isolate; aspect-ratio:1.12; background:#001633; }
+.player-art[data-position="Midfielder"] { background:#21000E; }
+.player-art[data-position="Goalkeeper"] { background:#172321; }
+.player-art[data-position="Defender"] { background:#071d35; }
+.player-art-stripes { position:absolute; inset:-40%; transform:rotate(-28deg); background:repeating-linear-gradient(90deg, transparent 0 18%, #A5004455 18% 35%, #004D9870 35% 52%); }
+.player-art::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, #06070900 45%, #06070988); pointer-events:none; }
+.player-art-orbit { position:absolute; width:115%; aspect-ratio:1; border:1px solid #ffffff20; border-radius:50%; left:20%; top:12%; }
+.player-art-number { display:block; position:relative; z-index:1; text-align:center; font-family:var(--font-display); font-size:65cqw; font-weight:800; letter-spacing:-.09em; line-height:1; padding-right:.09em; color:#F0F2F5; text-shadow:10px 12px 0 #06070930; transition:transform .45s cubic-bezier(.16,1,.3,1); }
+.player-art-caption, .player-art-edition { position:absolute; z-index:2; bottom:16px; font-family:var(--font-mono); font-size:9px; letter-spacing:.2em; color:#e2e5ed; }
+.player-art-caption { left:20px; } .player-art-edition { right:20px; }
+.player-art-large { aspect-ratio:1; }
+.player-art-large .player-art-number { font-size:65cqw; }
+.player-identity { container-type:inline-size; }
+.player-name { font-size:clamp(2rem, 10.5cqw, 5rem); line-height:1.04; padding-block:.06em; overflow-wrap:break-word; text-wrap:balance; }
+.player-navigation-link { container-type:inline-size; }
+.player-navigation-name { font-size:clamp(1.1rem, 7.5cqw, 1.875rem); overflow-wrap:break-word; }
+.squad-text-link { color:#F5D741; text-decoration:underline; text-underline-offset:5px; }
+.squad-text-link:hover { color:#FDF1BF; }
+.squad-text-link:active { color:white; }
+.tactical-pitch { position:relative; width:100%; aspect-ratio:1.3; border:1px solid #ffffff40; background:repeating-linear-gradient(0deg,#ffffff02 0 16.66%,#ffffff05 16.66% 33.33%); }
+.tactical-pitch::before { content:''; position:absolute; top:50%; left:0; right:0; border-top:1px solid #ffffff30; }
+.tactical-pitch::after { content:''; position:absolute; width:25%; aspect-ratio:1; top:50%; left:50%; border:1px solid #ffffff30; border-radius:50%; transform:translate(-50%,-50%); }
+.pitch-box { position:absolute; left:30%; width:40%; height:19%; border:1px solid #ffffff30; }
+.pitch-box-top { top:0; border-top:0; } .pitch-box-bottom { bottom:0; border-bottom:0; }
+.pitch-zone { position:absolute; width:30%; height:25%; border:1px solid #F5D741; background:#EDBB0020; left:35%; top:38%; z-index:1; }
+.pitch-zone[data-zone="goal"] { top:80%; height:18%; }
+.pitch-zone[data-zone="defence"] { top:63%; width:60%; left:20%; }
+.pitch-zone[data-zone="right-defence"] { top:63%; left:62%; }
+.pitch-zone[data-zone="left"] { top:15%; left:8%; }
+.pitch-zone[data-zone="right"] { top:15%; left:62%; }
+.pitch-zone[data-zone="centre"] { top:8%; }
+/* Magic UI shimmer pattern, adapted to a single interaction-only light sweep. */
+.player-card .player-art::before { content:''; position:absolute; z-index:2; inset:-20% auto -20% 0; width:45%; background:linear-gradient(90deg,transparent,#ffffff12,transparent); transform:translateX(-160%) skewX(-20deg); pointer-events:none; }
+@keyframes player-light-sweep { from { transform:translateX(-160%) skewX(-20deg); } to { transform:translateX(350%) skewX(-20deg); } }
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .player-card:hover .player-art-number { transform:translateY(-4px) scale(1.025); }
+  .player-card:hover .player-art::before { animation:player-light-sweep .65s ease-out; }
+}
+@media (prefers-reduced-motion:no-preference) {
+  .player-card:focus-visible .player-art::before { animation:player-light-sweep .65s ease-out; }
+}
+@media (max-width:639px) { .player-art { aspect-ratio:1.5; } .player-art-number { font-size:52cqw; } .player-art-large { aspect-ratio:1.25; } .player-art-large .player-art-number { font-size:58cqw; } }
+@media (prefers-reduced-motion:reduce) {
+  .squad-light { animation:none; }
+  .squad-experience *, .squad-experience *::before, .squad-experience *::after { transition:none !important; animation:none !important; }
+  .squad-experience .player-art-number, .squad-experience .group:hover svg { transform:none !important; }
+}
+@media (forced-colors:active) {
+  .squad-title-outline { color:CanvasText; -webkit-text-stroke:0; }
+  .squad-filter[aria-pressed="true"] { color:Highlight; border-color:Highlight; }
+  .pitch-zone { border:3px solid Highlight; }
+}

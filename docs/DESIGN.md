@@ -89,3 +89,30 @@ The visual philosophy draws from high-end European editorial magazines, cinemati
 - **Primary Button**: Blaugrana gradient accent or pure white with dark typography, high contrast, subtle inner glow.
 - **Secondary Button**: Translucent obsidian with crisp border `border-white/15 hover:border-white/40`.
 - **Ghost Button**: Subtle text transition with interactive underline or arrow spring slide.
+
+## Squad archive refinement decisions
+
+The Squad collection retains the runtime palette and Syne / Inter / JetBrains
+Mono typography defined by `tailwind.config.ts` and `app/globals.css`. This is an
+English-language editorial content experience, not an admin application.
+
+- Original shirt-number artwork is the signature visual. Type scales from its
+  containing card/profile using container query units, not the viewport.
+- A short masked headline reveal is the hero moment; the existing `Reveal`
+  primitive owns its motion policy in `lib/motion.ts`.
+- A single, low-opacity light sweep responds to card hover or keyboard focus.
+  There are no ambient loops, pointer trackers, animated ratings or border beams.
+- Filter updates replace results immediately, preserve surviving card identity,
+  and animate card positions with transforms. A one-row minimum prevents a
+  collapsed result region; the page still grows/shrinks with the selected results.
+- Shared focus rings use `--gold`. A skip link and document scroll padding keep
+  navigation accessible around the fixed header. The mobile menu is a non-modal
+  disclosure with bounded scrolling, Escape and focus-leave dismissal.
+- The document scrollbar baseline uses `--scrollbar-track`, `--scrollbar-thumb`,
+  `--scrollbar-hover` and `--scrollbar-active` in `app/globals.css`, with standard
+  properties, WebKit fallbacks, stable gutter and system forced-colors handling.
+- Reduced motion removes reveal translation, masking and stagger; static content,
+  position filtering and gold selection/focus cues remain available.
+
+These choices preserve the homepage's visual identity. Browser rendering remains
+an explicit verification requirement; source inspection alone is not visual QA.

@@ -2,17 +2,18 @@
 
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { EASINGS } from '@/lib/motion';
+import { getRevealAnimation, type RevealDirection } from '@/lib/motion';
 
 interface RevealProps {
   children: React.ReactNode;
-  direction?: 'up' | 'down' | 'left' | 'right' | 'none';
+  direction?: RevealDirection;
   delay?: number;
   duration?: number;
   scale?: boolean;
   className?: string;
   width?: 'fit' | 'full';
   triggerOnce?: boolean;
+  clip?: boolean;
 }
 
 export function Reveal({
@@ -24,54 +25,18 @@ export function Reveal({
   className = '',
   width = 'full',
   triggerOnce = true,
+  clip = false,
 }: RevealProps) {
   const shouldReduceMotion = useReducedMotion();
 
-  const getInitialPosition = () => {
-    if (shouldReduceMotion) return { opacity: 0 };
-    
-    const distance = 28;
-    switch (direction) {
-      case 'up':
-        return { opacity: 0, y: distance, scale: scale ? 0.96 : 1 };
-      case 'down':
-        return { opacity: 0, y: -distance, scale: scale ? 0.96 : 1 };
-      case 'left':
-        return { opacity: 0, x: distance, scale: scale ? 0.96 : 1 };
-      case 'right':
-        return { opacity: 0, x: -distance, scale: scale ? 0.96 : 1 };
-      case 'none':
-      default:
-        return { opacity: 0, scale: scale ? 0.96 : 1 };
-    }
-  };
-
-  const getVisiblePosition = () => {
-    if (shouldReduceMotion) return { opacity: 1 };
-
-    switch (direction) {
-      case 'up':
-      case 'down':
-        return { opacity: 1, y: 0, scale: 1 };
-      case 'left':
-      case 'right':
-        return { opacity: 1, x: 0, scale: 1 };
-      case 'none':
-      default:
-        return { opacity: 1, scale: 1 };
-    }
-  };
+  const animation = getRevealAnimation({ direction, delay, duration, scale, clip, reduced: !!shouldReduceMotion });
 
   return (
     <motion.div
-      initial={getInitialPosition()}
-      whileInView={getVisiblePosition()}
+      initial={animation.initial}
+      whileInView={animation.visible}
       viewport={{ once: triggerOnce, margin: '-40px' }}
-      transition={{
-        duration: shouldReduceMotion ? 0.2 : duration,
-        delay,
-        ease: EASINGS.editorial,
-      }}
+      transition={animation.transition}
       className={`${width === 'full' ? 'w-full' : 'w-fit'} ${className}`}
     >
       {children}

@@ -43,9 +43,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="bg-background text-foreground selection:bg-grana-600 selection:text-white min-h-screen flex flex-col font-sans">
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <GrainOverlay />
         <Header />
-        <main className="flex-1 relative z-10">{children}</main>
+        <main id="main-content" tabIndex={-1} className="flex-1 relative z-10">{children}</main>
         <Footer />
       </body>
     </html>

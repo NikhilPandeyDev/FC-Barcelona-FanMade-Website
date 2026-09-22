@@ -1,5 +1,31 @@
 import { Variants, Transition } from 'framer-motion';
 
+export type RevealDirection = 'up' | 'down' | 'left' | 'right' | 'none';
+
+// Shared by Reveal and its regression checks. Explicit neutral transforms also
+// reset an in-flight reveal when the operating-system motion preference changes.
+export function getRevealAnimation({
+  direction = 'up', delay = 0, duration = 0.7, scale = false, clip = false, reduced = false,
+}: {
+  direction?: RevealDirection; delay?: number; duration?: number;
+  scale?: boolean; clip?: boolean; reduced?: boolean;
+}) {
+  const neutral = { x: 0, y: 0, scale: 1, clipPath: 'none' };
+  const distance = reduced ? 0 : 28;
+  return {
+    initial: {
+      ...neutral,
+      opacity: 0,
+      x: reduced ? 0 : direction === 'left' ? distance : direction === 'right' ? -distance : 0,
+      y: reduced ? 0 : direction === 'up' ? distance : direction === 'down' ? -distance : 0,
+      scale: scale && !reduced ? 0.96 : 1,
+      clipPath: clip && !reduced ? 'inset(0% 0% 100% 0%)' : neutral.clipPath,
+    },
+    visible: { ...neutral, opacity: 1, clipPath: clip && !reduced ? 'inset(0% 0% 0% 0%)' : 'none' },
+    transition: { duration: reduced ? 0.2 : duration, delay: reduced ? 0 : delay, ease: EASINGS.editorial },
+  };
+}
+
 export const EASINGS = {
   // Smooth editorial deceleration
   editorial: [0.16, 1, 0.3, 1],

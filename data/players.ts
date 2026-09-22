@@ -1,4 +1,13 @@
 import { Player } from './types';
+import { SquadProfileSchema, type SquadProfile } from '@/lib/schemas/squad';
+import { squadEditorial } from './squad-editorial';
+
+export const squadEdition = {
+  season: '2024/25',
+  label: 'Selected player archive',
+  sourceUrl: 'https://www.fcbarcelona.com/en/football/first-team/news/4106426/202425fc/featured',
+  note: 'Eight selected profiles from 2024/25. Shirt numbers reflect that season. This is not the complete or current squad.',
+} as const;
 
 export const players: Player[] = [
   {
@@ -334,3 +343,16 @@ export const players: Player[] = [
     ],
   },
 ];
+
+// Legacy homepage totals and radar scores have no provenance. They are never
+// forwarded into SquadProfile; a verified season must be explicitly supplied.
+export function getSquadPlayers(): SquadProfile[] {
+  return players.map((player) => {
+    const content = squadEditorial[player.slug];
+    if (!content) throw new Error(`Missing squad editorial: ${player.slug}`);
+    return SquadProfileSchema.parse({ ...player, ...content, stats: null });
+  });
+}
+export function getPlayerBySlug(slug: string): SquadProfile | undefined {
+  return getSquadPlayers().find((player) => player.slug === slug);
+}

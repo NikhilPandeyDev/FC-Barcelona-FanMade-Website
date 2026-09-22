@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { ArrowRight, Sparkles, Star, Zap } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { Section } from '../ui/Section';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
@@ -27,6 +27,7 @@ export function SquadSpotlight() {
       title="The Protagonists"
       subtitle="The stars carrying the timeless philosophy into the future. Discover key metrics, roles, and profiles."
       containerSize="wide"
+      headerRight={<Button href="/squad" variant="secondary" rightIcon={<ArrowRight className="w-4 h-4" />}>Explore the squad</Button>}
     >
       {/* Position Filter Pills */}
       <div className="flex flex-wrap items-center gap-2 mb-10">

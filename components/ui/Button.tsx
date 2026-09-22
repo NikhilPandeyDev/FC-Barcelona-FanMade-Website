@@ -2,19 +2,22 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Magnetic } from '../motion/Magnetic';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonStyleProps {
   variant?: 'primary' | 'secondary' | 'gold' | 'ghost' | 'outline';
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  href?: string;
   isMagnetic?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   children: React.ReactNode;
 }
+
+type ButtonProps = ButtonStyleProps & (
+  | (React.ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined })
+  | (React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string })
+);
 
 export function Button({
   variant = 'primary',
@@ -48,18 +51,19 @@ export function Button({
   };
 
   const content = (
-    <span className="relative z-10 flex items-center justify-center">
+    <span className="relative z-10 flex items-center justify-center gap-2">
       {leftIcon && <span className="flex-shrink-0">{leftIcon}</span>}
       <span>{children}</span>
-      {rightIcon && <span className="flex-shrink-0 transition-transform group-hover:translate-x-1">{rightIcon}</span>}
+      {rightIcon && <span className="flex-shrink-0 transition-transform group-hover:translate-x-1 motion-reduce:transform-none">{rightIcon}</span>}
     </span>
   );
 
   const buttonElement = href ? (
     <Link
       href={href}
+      {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
       className={cn(
-        'group relative inline-flex items-center justify-center transition-all duration-200 select-none overflow-hidden cursor-pointer',
+        'group relative inline-flex items-center justify-center transition-all duration-200 select-none overflow-hidden cursor-pointer motion-reduce:transform-none',
         variantStyles[variant],
         sizeStyles[size],
         className
@@ -68,18 +72,18 @@ export function Button({
       {content}
     </Link>
   ) : (
-    <motion.button
-      whileTap={{ scale: 0.97 }}
+    <button
+      type="button"
       className={cn(
-        'group relative inline-flex items-center justify-center transition-all duration-200 select-none overflow-hidden cursor-pointer',
+        'group relative inline-flex items-center justify-center transition-all duration-200 select-none overflow-hidden cursor-pointer motion-reduce:transform-none disabled:cursor-not-allowed disabled:opacity-50',
         variantStyles[variant],
         sizeStyles[size],
         className
       )}
-      {...(props as any)}
+      {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     >
       {content}
-    </motion.button>
+    </button>
   );
 
   if (isMagnetic) {

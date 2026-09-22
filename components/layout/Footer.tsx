@@ -46,7 +46,7 @@ export function Footer() {
             </span>
             <ul className="flex flex-col gap-2.5 text-sm text-muted-foreground">
               <li>
-                <Link href="/#squad" className="hover:text-white transition-colors">
+                <Link href="/squad" className="hover:text-white transition-colors">
                   First Team Squad
                 </Link>
               </li>
