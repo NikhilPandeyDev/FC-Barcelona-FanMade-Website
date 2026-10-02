@@ -152,3 +152,12 @@ All datasets reside in `/data/` as static TypeScript objects validated on import
 When testing or building:
 1. `validateDataset(playersData, PlayerListSchema)` runs during development mode to detect schema deviations.
 2. In production builds, zero runtime parse overhead occurs once statically evaluated.
+# Match Center historical boundary
+
+The Match Center consumes normalized, Zod-validated historical records from
+`data/match-center.ts`. Source-backed fields live in `data/match-evidence.ts`;
+`data/matches.ts` contains identity metadata only. No component imports the
+legacy match schema or assumes Barça is the home side. Missing statistics,
+events, lineups and tactical coordinates are nullable, never synthesized.
+See [MATCH-CENTER.md](MATCH-CENTER.md) for the source inventory and migration
+boundary. There is no live provider or API credential in this milestone.

@@ -62,7 +62,7 @@ export function Hero() {
               </Button>
 
               <Button
-                href="#matches"
+                href="/matches"
                 variant="secondary"
                 size="lg"
                 leftIcon={<Calendar className="w-4 h-4 text-gold-400" />}

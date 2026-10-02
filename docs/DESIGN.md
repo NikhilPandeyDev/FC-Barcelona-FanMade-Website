@@ -116,3 +116,17 @@ English-language editorial content experience, not an admin application.
 
 These choices preserve the homepage's visual identity. Browser rendering remains
 an explicit verification requirement; source inspection alone is not visual QA.
+
+## Match Center — the moment
+
+The Match Center keeps the same Syne/Inter/mono typography and dark blaugrana
+palette, with a broadcast scoreboard instead of player artwork. Squared surfaces,
+thin rules and generous spacing frame the scores. Gold denotes status and
+interaction. Blue and pink distinguish home/away comparison bars, alongside
+text labels. Original monograms replace unavailable licensed crest assets.
+
+The selected 2024/25 archive is explicit on the hub and every detail page.
+Desktop opposing-team timelines become chronological single-column stories on
+mobile. Filters use native controls and preserve focus. The tactical renderer
+only places players when verified coordinates exist; unavailable shape is stated
+in text. Full implementation and evidence: [MATCH-CENTER.md](MATCH-CENTER.md).

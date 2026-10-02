@@ -108,3 +108,11 @@ Currently, these resolve from `/data/` with Zod validation. When integrating a t
 2. Zod will validate the incoming payload against defined schemas.
 3. Fallback gracefully to local curated data if an API is unavailable or rate-limited.
 4. Component layer requires zero changes because the output interface remains strictly identical.
+# Match Center addition
+
+`/matches` and static `/matches/[id]` use `components/matches`. The adapter in
+`lib/matches/adapter.ts` validates a provider-neutral contract from
+`lib/schemas/matches.ts`. `data/match-center.ts` exposes full records to server
+components and summary projections to client filters. Existing motion primitives
+handle entrances. The route group has loading/error boundaries and uses the
+shared not-found page. Details: [MATCH-CENTER.md](MATCH-CENTER.md).

@@ -12,7 +12,7 @@ import { Button } from '../ui/Button';
 
 const navLinks = [
   { name: 'Squad', href: '/squad' },
-  { name: 'Matches', href: '/#matches' },
+  { name: 'Matches', href: '/matches' },
   { name: 'Tactics & Stats', href: '/#stats' },
   { name: 'Heritage', href: '/#history' },
   { name: 'Camp Nou', href: '/#stadium' },
@@ -118,11 +118,11 @@ export function Header() {
 
           {/* Right Header Actions */}
           <div className="hidden xl:flex items-center gap-3">
-            {/* Live / Next match indicator */}
-            <Link href="/#matches" className="hidden 2xl:block">
+            {/* Curated match archive */}
+            <Link href="/matches" className="hidden 2xl:block">
               <Badge variant="blau" size="sm" className="hover:bg-blau-500/30 cursor-pointer">
-                <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />
-                NEXT: ATALANTA (UCL)
+                <span className="w-1.5 h-1.5 rounded-full bg-gold-400" />
+                MATCH ARCHIVE: 2024/25
               </Badge>
             </Link>
 

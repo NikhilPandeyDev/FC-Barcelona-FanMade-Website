@@ -51,7 +51,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/#matches" className="hover:text-white transition-colors">
+                <Link href="/matches" className="hover:text-white transition-colors">
                   Fixtures & Results
                 </Link>
               </li>

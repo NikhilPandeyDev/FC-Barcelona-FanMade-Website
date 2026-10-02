@@ -1,6 +1,17 @@
-import { Match } from './types';
+﻿// Curated match identities. Verified results and optional detail live in match-evidence.ts.
+// No generated crest URLs, broadcast assumptions, or unverified statistics.
+export type CuratedMatch = {
+  id: string;
+  competition: string;
+  competitionRound: string;
+  season: string;
+  date: string;
+  venue: string;
+  isHome: boolean;
+  opponent: { name: string; shortName: string };
+};
 
-export const matches: Match[] = [
+export const matches: CuratedMatch[] = [
   {
     id: 'm-ucl-01',
     competition: 'UEFA Champions League',
@@ -9,19 +20,7 @@ export const matches: Match[] = [
     date: '2025-01-29T20:00:00Z',
     venue: 'Estadi Olímpic Lluís Companys, Barcelona',
     isHome: true,
-    opponent: {
-      name: 'Atalanta BC',
-      shortName: 'ATA',
-      logoUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=120&q=80',
-      city: 'Bergamo',
-    },
-    status: 'UPCOMING',
-    broadcastInfo: {
-      spain: 'Movistar+ Liga de Campeones',
-      usa: 'Paramount+, CBS Sports',
-      uk: 'TNT Sports',
-      global: 'UEFA.tv',
-    },
+    opponent: { name: 'Atalanta BC', shortName: 'ATA' },
   },
   {
     id: 'm-liga-clasico',
@@ -31,61 +30,7 @@ export const matches: Match[] = [
     date: '2024-10-26T19:00:00Z',
     venue: 'Santiago Bernabéu, Madrid',
     isHome: false,
-    opponent: {
-      name: 'Real Madrid CF',
-      shortName: 'RMA',
-      logoUrl: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=120&q=80',
-      city: 'Madrid',
-    },
-    status: 'FINISHED',
-    score: {
-      barca: 4,
-      opponent: 0,
-      halfTime: {
-        barca: 0,
-        opponent: 0,
-      },
-    },
-    events: [
-      {
-        minute: 54,
-        type: 'GOAL',
-        player: 'Robert Lewandowski',
-        assistPlayer: 'Marc Casadó',
-        team: 'BARCA',
-      },
-      {
-        minute: 56,
-        type: 'GOAL',
-        player: 'Robert Lewandowski',
-        assistPlayer: 'Alejandro Balde',
-        team: 'BARCA',
-      },
-      {
-        minute: 77,
-        type: 'GOAL',
-        player: 'Lamine Yamal',
-        assistPlayer: 'Raphinha',
-        team: 'BARCA',
-      },
-      {
-        minute: 84,
-        type: 'GOAL',
-        player: 'Raphinha',
-        assistPlayer: 'Íñigo Martínez',
-        team: 'BARCA',
-      },
-    ],
-    stats: {
-      possession: [58, 42],
-      shotsTotal: [15, 9],
-      shotsOnTarget: [7, 4],
-      xg: [2.85, 0.94],
-      passes: [542, 388],
-      passAccuracy: [88, 81],
-      corners: [6, 4],
-      fouls: [12, 16],
-    },
+    opponent: { name: 'Real Madrid CF', shortName: 'RMA' },
   },
   {
     id: 'm-ucl-bayern',
@@ -95,39 +40,6 @@ export const matches: Match[] = [
     date: '2024-10-23T19:00:00Z',
     venue: 'Estadi Olímpic Lluís Companys, Barcelona',
     isHome: true,
-    opponent: {
-      name: 'FC Bayern München',
-      shortName: 'BAY',
-      logoUrl: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=120&q=80',
-      city: 'Munich',
-    },
-    status: 'FINISHED',
-    score: {
-      barca: 4,
-      opponent: 1,
-      halfTime: {
-        barca: 3,
-        opponent: 1,
-      },
-    },
-    events: [
-      { minute: 1, type: 'GOAL', player: 'Raphinha', team: 'BARCA' },
-      { minute: 18, type: 'GOAL', player: 'Harry Kane', team: 'OPPONENT' },
-      { minute: 36, type: 'GOAL', player: 'Robert Lewandowski', team: 'BARCA' },
-      { minute: 45, type: 'GOAL', player: 'Raphinha', team: 'BARCA' },
-      { minute: 56, type: 'GOAL', player: 'Raphinha', team: 'BARCA' },
-    ],
-    stats: {
-      possession: [40, 60],
-      shotsTotal: [12, 14],
-      shotsOnTarget: [6, 3],
-      xg: [2.1, 1.3],
-      passes: [378, 592],
-      passAccuracy: [82, 89],
-      corners: [4, 7],
-      fouls: [11, 10],
-    },
+    opponent: { name: 'FC Bayern München', shortName: 'BAY' },
   },
 ];
-
-export const nextMatch = matches.find((m) => m.status === 'UPCOMING') || matches[0];
