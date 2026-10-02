@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 
 export default function Error({
-  error,
   reset,
 }: {
   error: Error & { digest?: string };
@@ -26,7 +25,6 @@ export default function Error({
       </h1>
       <p className="text-muted-foreground text-sm max-w-md mb-8">
         We encountered an unexpected error loading this part of the stadium experience.
-        {error?.message && <span className="block mt-2 text-xs font-mono text-muted-foreground/70">Error: {error.message}</span>}
       </p>
 
       <div className="flex items-center gap-4">

@@ -13,6 +13,8 @@ function load(relativePath) {
   modules.set(filename, module);
   const nativeRequire = createRequire(filename);
   const localRequire = (name) => {
+    // Next's build enforces this marker; unit tests deliberately exercise server code.
+    if (name === 'server-only') return {};
     if (!name.startsWith('@/') && !name.startsWith('.')) return nativeRequire(name);
     const base = name.startsWith('@/') ? path.join(root, name.slice(2)) : path.resolve(path.dirname(filename), name);
     const source = [base, `${base}.ts`, `${base}.tsx`, path.join(base, 'index.ts')].find((candidate) => fs.existsSync(candidate) && fs.statSync(candidate).isFile());

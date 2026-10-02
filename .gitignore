@@ -23,11 +23,8 @@ lerna-debug.log*
 .pnpm-debug.log*
 
 # Environment files and secrets
-.env
-.env*.local
-.env.development
-.env.test
-.env.production
+.env*
+!.env.example
 *.pem
 
 # Vercel & Deployment

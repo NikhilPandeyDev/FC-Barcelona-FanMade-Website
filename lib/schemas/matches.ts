@@ -23,14 +23,18 @@ export const LineupSchema = z.object({
 }).refine((lineup) => new Set(lineup.starters.map((player) => player.number)).size === 11, 'Starting shirt numbers must be unique');
 export const MatchSchema = z.object({
   id: text, competition: CompetitionSchema, kickoff: z.string().datetime().nullable(), venue: text.nullable(),
-  homeTeam: TeamSchema, awayTeam: TeamSchema, status: z.enum(['UPCOMING', 'FINISHED', 'POSTPONED']),
+  homeTeam: TeamSchema, awayTeam: TeamSchema, status: z.enum(['UPCOMING', 'FINISHED', 'POSTPONED', 'IN_PROGRESS', 'SUSPENDED', 'CANCELLED', 'AWARDED']),
   score: ScoreSchema.nullable(), halfTime: ScoreSchema.nullable(), source: MatchSourceSchema,
+  dataKind: z.enum(['curated', 'provider']).default('curated'),
+  retrievedAt: z.string().datetime().optional(), updatedAt: z.string().datetime().nullable().optional(),
+  scoreDuration: z.enum(['REGULAR', 'EXTRA_TIME', 'PENALTY_SHOOTOUT']).optional(), penalties: ScoreSchema.nullable().optional(),
   events: z.object({ items: z.array(MatchEventSchema), source: MatchSourceSchema, coverage: text }).nullable(),
   stats: z.object({ items: z.array(MatchStatSchema), source: MatchSourceSchema }).nullable(),
   lineups: z.object({ home: LineupSchema.nullable(), away: LineupSchema.nullable() }).nullable(),
   editorial: z.object({ title: text, description: text }),
 }).superRefine((match, context) => {
-  if ((match.status === 'FINISHED') !== (match.score !== null)) context.addIssue({ code: 'custom', path: ['score'], message: 'Only finished matches have final scores' });
+  if (match.status === 'FINISHED' && match.score === null) context.addIssue({ code: 'custom', path: ['score'], message: 'Finished matches require a final score' });
+  if (['UPCOMING', 'POSTPONED', 'CANCELLED'].includes(match.status) && match.score !== null) context.addIssue({ code: 'custom', path: ['score'], message: 'Unplayed matches cannot have a score' });
   if (match.halfTime && (!match.score || match.halfTime.home > match.score.home || match.halfTime.away > match.score.away)) context.addIssue({ code: 'custom', path: ['halfTime'], message: 'Half-time score must not exceed full time' });
   if (match.homeTeam.id === match.awayTeam.id) context.addIssue({ code: 'custom', path: ['awayTeam'], message: 'Teams must differ' });
 });

@@ -130,3 +130,7 @@ Desktop opposing-team timelines become chronological single-column stories on
 mobile. Filters use native controls and preserve focus. The tactical renderer
 only places players when verified coordinates exist; unavailable shape is stated
 in text. Full implementation and evidence: [MATCH-CENTER.md](MATCH-CENTER.md).
+
+## Football snapshots and provenance
+
+Preserve the cinematic Match Center and the 2024/25 editorial Squad collection. Provider snapshots carry retrieval time and visible attribution; curated fallback is explicitly historical. Deep data absent from the free tier stays unavailable. The optional season roster is separate from editorial profiles and the standings table uses an accessible native disclosure. Do not label delayed snapshots live. Source-level wrapping/null checks are completed; rendered responsive and accessibility verification remains pending because Computer Use could not verify the browser URL.

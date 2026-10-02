@@ -122,7 +122,7 @@ export function Header() {
             <Link href="/matches" className="hidden 2xl:block">
               <Badge variant="blau" size="sm" className="hover:bg-blau-500/30 cursor-pointer">
                 <span className="w-1.5 h-1.5 rounded-full bg-gold-400" />
-                MATCH ARCHIVE: 2024/25
+                MATCH CENTER
               </Badge>
             </Link>
 

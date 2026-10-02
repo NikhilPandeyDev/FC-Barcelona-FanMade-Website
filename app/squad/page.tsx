@@ -3,6 +3,9 @@ import { Container } from '@/components/ui/Container';
 import { SquadHero } from '@/components/squad/SquadHero';
 import { SquadGrid } from '@/components/squad/SquadGrid';
 import { getSquadPlayers, squadEdition } from '@/data/players';
+import { CurrentSquad } from '@/components/football/CurrentSquad';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'The Squad — 2024/25 Collection | Culé Experience',
@@ -13,6 +16,7 @@ export default function SquadPage() {
   return <>
     <SquadHero />
     <Container size="wide">
+      <CurrentSquad />
       <SquadGrid players={getSquadPlayers()} />
       <div className="mb-16 flex flex-col justify-between gap-4 border-t border-white/15 pt-6 text-xs text-muted-foreground sm:flex-row">
         <p>Original number artwork. An unofficial fan perspective.</p>

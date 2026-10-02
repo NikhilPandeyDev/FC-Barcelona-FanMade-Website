@@ -14,6 +14,8 @@ export function MatchScoreboard({ match }: { match: Match }) {
           {match.score ? <><span>{match.score.home}</span><span className={styles.scoreDash} aria-hidden="true">:</span><span>{match.score.away}</span></> : <span className={styles.versus}>VS</span>}
         </div>
         {match.halfTime && <span className={styles.halfTime}>HT {match.halfTime.home} – {match.halfTime.away}</span>}
+        {match.scoreDuration === 'EXTRA_TIME' && <span className={styles.halfTime}>After extra time</span>}
+        {match.scoreDuration === 'PENALTY_SHOOTOUT' && <span className={styles.halfTime}>After penalties{match.penalties ? ` · ${match.penalties.home} – ${match.penalties.away}` : ''}</span>}
       </div>
       <div className={styles.team}><TeamMark team={match.awayTeam} /><span className={styles.teamName}>{match.awayTeam.name}</span><span className={styles.kicker}>AWAY</span></div>
     </div>

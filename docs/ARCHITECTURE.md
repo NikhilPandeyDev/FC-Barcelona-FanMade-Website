@@ -116,3 +116,7 @@ Currently, these resolve from `/data/` with Zod validation. When integrating a t
 components and summary projections to client filters. Existing motion primitives
 handle entrances. The route group has loading/error boundaries and uses the
 shared not-found page. Details: [MATCH-CENTER.md](MATCH-CENTER.md).
+
+## Football provider boundary
+
+Football requests run through lib/football/client.ts, validated provider schemas, the provider adapter, domain models, the fallback service and cached server accessors. UI components consume normalized results. Home and Match Center loading are scoped Suspense boundaries so dynamic match details can resolve not-found before streaming HTTP headers. See [DATA.md](DATA.md) for provider scope, cache policy and configuration.
